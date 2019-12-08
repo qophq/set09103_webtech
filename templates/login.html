@@ -36,17 +36,19 @@
                                 <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
-                                        {% with messages = get_flashed_messages(with_categories=true) %}
-                                        {% if messages %}
-                                        {% for category, message in messages %}
-                                        <div class="alert alert-{{ category }}">
-                                            {{ message }}
-                                        </div>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endwith %}
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                            {% if messages %}
+                                            {% for category, message in messages %}
+                                            <div class="alert alert-{{ category }}">
+                                                {{ message }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                        </div>
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome back!</h1>
                                         </div>
                                         <form method="POST" action ="" class="user">
                                             <div class="form-group">
@@ -73,9 +75,11 @@
                                                 {{ form.password(class="form-control form-control-user") }}   
                                                 {% endif %}  
                                             </div>
-                                            <div class="form-check">
-                                                {{ form.remember(class="custom-control-input") }}
-                                                {{ form.remember.label(class="custom-control-label")  }}
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    {{ form.remember(class="custom-control-input") }}
+                                                    {{ form.remember.label(class="custom-control-label")  }}
+                                                </div>
                                             </div>
                                             <a href="{{ url_for('account')}}" class="btn btn-primary btn-user btn-block">
                                                 Login
