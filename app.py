@@ -15,7 +15,8 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
     
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')
+        return "User('{self.username}', '{self.email}', '{self.image_file}')".format(
+            self.username=self.username, self.email=self.email, self.image_file=self.image_file)
     
 @app.route("/")
 def home():
