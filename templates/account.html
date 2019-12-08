@@ -265,7 +265,7 @@
                         <img src="/static/img/account.png" style="width:200px" class="rounded mx-auto d-block">
                             <hr>
                             {% if name %}
-                            <h1>Hello, {{ name }}.</h1>
+                            <h1>Hello, {{ form.username.data }}.</h1>
                             {% else % }
                             <h1>Hello, person without name.</h1>
                             {% endif %}
