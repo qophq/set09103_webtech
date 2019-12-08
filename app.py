@@ -17,7 +17,7 @@ def index():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash('Account created for {form.username.data}!', 'sucess')
+        flask.flash('Account created for {form.username.data}!', 'sucess')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -26,10 +26,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'admin@test.com' and form.password.data == 'password':
-            flash('Successful login!', 'success')
+            flask.flash('Successful login!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Unsuccessful login. Check email and password!', 'danger')
+            flask.flash('Unsuccessful login. Check email and password!', 'danger')
     return render_template('login.html', form=form)
 
 @app.route("/account")
