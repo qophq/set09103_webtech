@@ -36,21 +36,46 @@
                                 <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
+                                        {% with messages = get_flashed_messages(with_categories=true) %}
+                                        {% if messages %}
+                                        {% for category, message in messages %}
+                                        <div class="alert alert-{{ category }}">
+                                            {{ message }}
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
-                                        <form class="user">
+                                        <form method="POST" action ="" class="user">
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                    <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                                {% if form.email.errors %}
+                                                {{ form.email(class="form-control form-control-user is-invalid") }} 
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.email.errors %}
+                                                    <span>{{ error }}</span>
+                                                    {% endfor %}
                                                 </div>
+                                                {% else %}
+                                                {{ form.email(class="form-control form-control-user") }}   
+                                                {% endif %}  
+                                            </div>
+                                            <div class="form-group">
+                                                {% if form.password.errors %}
+                                                {{ form.password(class="form-control form-control-user is-invalid") }} 
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.password.errors %}
+                                                    <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                {{ form.password(class="form-control form-control-user") }}   
+                                                {% endif %}  
+                                            </div>
+                                            <div class="form-check">
+                                                {{ form.remember(class="custom-control-input") }}
+                                                {{ form.remember.label(class="custom-control-label")  }}
                                             </div>
                                             <a href="account.html" class="btn btn-primary btn-user btn-block">
                                                 Login
@@ -58,7 +83,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="register.html">Create an Account!</a>
+                                            <a class="small" href="{{ url_for('register')}}">Create an account!</a>
                                         </div>
                                     </div>
                                 </div>
@@ -74,13 +99,13 @@
 
         <!-- Begin scripts -->
 
-                <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
-                <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
-                <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
 
     </body>
 
