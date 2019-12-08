@@ -13,10 +13,14 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='account.png')
     password = db.Column(db.String(60), nullable=False)
-    
+
+    def __init__(self, username, email, image_file):
+        self.username = username
+        self.email = email
+        self.image_file = image_file
+
     def __repr__(self):
-        return "User('{self.username}', '{self.email}', '{self.image_file}')".format(
-            self.username=self.username, self.email=self.email, self.image_file=self.image_file)
+        return {'username':self.username, 'email':self.email, 'image_file':self.image_file}
     
 @app.route("/")
 def home():
